@@ -6,22 +6,31 @@ namespace gpc {
 
     namespace gl {
 
+        inline void _throw_error(const char *text, int err, int line, const char *file)
+        {
+            throw std::runtime_error(std::string(text) + 
+                " with error " + std::to_string(err) + 
+                " failed at line " + std::to_string(line) + 
+                " in file " + file
+                );
+        }
+
         template<typename F, typename... Args>
         auto func(const char *text, int line, const char *file, F fn, Args&&... args) -> decltype(fn(std::forward<Args>(args)...))
         {
             auto result = fn(std::forward<Args>(args)...);
             //if (result == static_cast<decltype(result)>(0)) throw std::runtime_error(text);
             auto err = glGetError();
-            if (err != 0) throw std::runtime_error(std::string(text) + " failed at line " + std::to_string(line) + " in file " + file);
+            if (err != 0) _throw_error(text, err, line, file);
             return result;
         }
 
         template<typename P, typename... Args>
-        auto proc(P pr, Args&&... args) -> decltype(pr(std::forward<Args>(args)...))
+        auto proc(const char *text, int line, const char *file, P pr, Args&&... args) -> decltype(pr(std::forward<Args>(args)...))
         {
             pr(std::forward<Args>(args)...);
             auto err = glGetError();
-            if (err != 0) throw std::runtime_error(std::string(text) + " failed at line " + std::to_string(line) + " in file " + file);
+            if (err != 0) _throw_error(text, err, line, file); 
         }
 
     } // ns gl
