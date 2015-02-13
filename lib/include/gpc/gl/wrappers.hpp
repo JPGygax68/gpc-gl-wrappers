@@ -7,10 +7,10 @@ namespace gpc {
 
     namespace gl {
 
-        inline void _throw_error(const char *text, int err, int line, const char *file)
+        inline void _throw_error(const char *text, GLenum err, int line, const char *file)
         {
             throw std::runtime_error(std::string(text) + 
-                " with error " + std::to_string(err) + 
+                " with error " + std::to_string((int)err) + 
                 " failed at line " + std::to_string(line) + 
                 " in file " + file
                 );
