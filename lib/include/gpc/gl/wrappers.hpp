@@ -10,7 +10,7 @@ namespace gpc {
         inline void _throw_error(const char *text, GLenum err, int line, const char *file)
         {
             throw std::runtime_error(std::string(text) + 
-                " with error " + std::to_string((int)err) + 
+                ": error " + std::to_string((int)err) + 
                 " failed at line " + std::to_string(line) + 
                 " in file " + file
                 );
@@ -44,8 +44,8 @@ namespace gpc {
 
 #if defined (GLDEBUG)  
 
-#define CALL_GL(fn, ...) gpc::gl::func(#fn, __LINE__, __FILE__, fn, __VA_ARGS__)
-#define EXEC_GL(pr, ...) gpc::gl::proc(#pr, __LINE__, __FILE__, pr, __VA_ARGS__)
+#define CALL_GL(fn, ...) ::gpc::gl::func(#fn, __LINE__, __FILE__, fn, __VA_ARGS__)
+#define EXEC_GL(pr, ...) ::gpc::gl::proc(#pr, __LINE__, __FILE__, pr, __VA_ARGS__)
 
 #else
 
