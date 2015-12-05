@@ -1,8 +1,9 @@
+project(lib_gpc-gl-wrappers)
 
-add_library(libGPCGLWrappers INTERFACE)
+add_library(${PROJECT_NAME} INTERFACE)
 
-target_include_directories(libGPCGLWrappers INTERFACE $<INSTALL_INTERFACE:include> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+target_include_directories(${PROJECT_NAME} INTERFACE $<INSTALL_INTERFACE:include> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 
-export(TARGETS libGPCGLWrappers FILE libGPCGLWrappers-targets.cmake)
-configure_file(libGPCGLWrappers-config.cmake.in libGPCGLWrappers-config.cmake @ONLY)
-export(PACKAGE libGPCGLWrappers)
+export(TARGETS ${PROJECT_NAME} FILE ${PROJECT_NAME}-targets.cmake)
+configure_file(${PROJECT_NAME}-config.cmake.in ${PROJECT_NAME}-config.cmake @ONLY)
+export(PACKAGE ${PROJECT_NAME} )
