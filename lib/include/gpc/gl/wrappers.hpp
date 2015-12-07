@@ -70,7 +70,6 @@ namespace gpc {
         }
 
         template<typename F, typename... Args>
-        [[deprecated]]
         auto func(const char *text, int line, const char *file, F fn, Args&&... args) -> decltype(fn(std::forward<Args>(args)...))
         {
             auto result = fn(std::forward<Args>(args)...);
@@ -81,13 +80,12 @@ namespace gpc {
         }
 
         template<typename P, typename... Args>
-        [[deprecated]]
         auto proc(const char *text, int line, const char *file, P pr, Args&&... args) -> decltype(pr(std::forward<Args>(args)...))
         {
             pr(std::forward<Args>(args)...);
             auto err = glGetError();
             if (err != 0) _throw_error(text, err, line, file);
-        };
+        }
 
     } // ns gl
     
