@@ -15,10 +15,13 @@ namespace gpc {
             // that there could be more than one) into a string
             bool flag = false;
             std::stringstream error_codes;
-            for (GLenum error = GL_NO_ERROR; (error = glGetError()) != GL_NO_ERROR; )
+            GLenum previous = GL_NO_ERROR;
+            for (GLenum error; (error = glGetError()) != GL_NO_ERROR; )
             {
+                if (error == previous) break;
                 if (flag) error_codes << ", "; else flag = true;
                 error_codes << error;
+                previous = error;
             }
 
             if (flag)
@@ -107,7 +110,7 @@ namespace gpc {
 #define CALL_GL(fn, ...) fn(__VA_ARGS__)
 #define EXEC_GL(pr, ...) pr(__VA_ARGS__)
 
-#define GL(cl, ...) cl(__VA_ARGS__)
+#define GL(cl, ...) gl##cl(__VA_ARGS__)
 
 #endif  
 
