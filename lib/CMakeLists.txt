@@ -1,4 +1,4 @@
-project(lib_gpc-gl-wrappers)
+project(libGPCGLWrappers)
 
 add_library(${PROJECT_NAME} INTERFACE)
 
