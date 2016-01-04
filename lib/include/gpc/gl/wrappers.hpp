@@ -9,6 +9,8 @@ namespace gpc {
 
     namespace gl {
 
+        using namespace ::gl;
+
         inline void check_previous_call(const char *text, int line, const char *file)
         {
             // Collect error codes (thanks to StackOverflow user Nicol Bolas for pointing out 
