@@ -9,7 +9,9 @@ namespace gpc {
 
     namespace gl {
 
-        // using namespace ::gl;
+    #ifdef GL_TYPES_IN_NAMESPACE
+        using namespace ::gl;
+    #endif
 
         inline void check_previous_call(const char *text, int line, const char *file)
         {
